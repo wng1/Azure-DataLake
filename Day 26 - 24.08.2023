@@ -6,3 +6,9 @@ Data engineers often need to use SQL to transform data; often as part of data in
 CREATE EXTERNAL TABLE AS SELECT (CETAS) statements to transform data, store the results in files in a dat alake that can be queried through a relational table in a serverless SQL
 database or processed directly from the file system.
 
+1) Use CETAS
+2) Encapulsate CETAS statement in Stored Procedure
+3) Include a data transformation Stored Procedure in a pipeline
+
+It is important to be familiar with ASA and experience using T-SQL to query and manipulate data.
+

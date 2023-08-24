@@ -12,3 +12,30 @@ database or processed directly from the file system.
 
 It is important to be familiar with ASA and experience using T-SQL to query and manipulate data.
 
+
+
+CREATE EXTERNAL DATA SOURCE files
+WITH (
+    LOCATION = 'https://'
+);
+
+
+CREATE DATABASE SCOPED CREDENTIAL storagekeycred
+WITH (
+    IDENTITY= 'SHARED ACCESS SIGNATURE',
+    SECRET = '__________________';
+
+
+CREATE EXTERNAL DATA SOURCE secureFiles
+WITH (
+    LOCATION = 'https://'
+    CREDENTIAL = storagekeycred
+);
+
+
+CREATE EXTERNAL FILE FORMAT ParquetFormat
+WITH (
+      FORMAT_TYPE = PARQUET,
+      DATA_COMPRESSION = '_________________________'
+);
+

@@ -1,2 +1,8 @@
 https://learn.microsoft.com/en-us/training/modules/use-azure-synapse-serverless-sql-pools-for-transforming-data-lake/1-introduction
 
+Data analyst query data and support analytical and reporting workloads
+Data engineers often need to use SQL to transform data; often as part of data ingestion or extract, transform, and load (ETL)
+
+CREATE EXTERNAL TABLE AS SELECT (CETAS) statements to transform data, store the results in files in a dat alake that can be queried through a relational table in a serverless SQL
+database or processed directly from the file system.
+

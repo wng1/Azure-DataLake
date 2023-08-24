@@ -39,3 +39,30 @@ WITH (
       DATA_COMPRESSION = '_________________________'
 );
 
+
+----------------------------------------------------------
+
+CREATE EXTERNAL TABLE SpecialOrders
+    WITH (
+        LOCATION = 'special_orders',
+        DATA_SOURCE = files,
+        FILE_FORMAT = ParquetFormat
+    )
+AS
+SELECT OrderID, CustomerName, OrderTotal
+FROM
+    OPENROWSET(
+        BULK 'test/*.csv',
+        DATA_SOURCE = 'files',
+        FORMAT = 'CSV',
+        PARSET_VERSION = '2.0',
+        HEADER_ROW = TRUE
+    ) AS source_data
+WHERE OrderType = 'Special Order';
+
+
+DROP EXTERNAL TABLE SpecialOrders;
+
+
+
+

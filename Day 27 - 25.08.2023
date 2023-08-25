@@ -1,2 +1,10 @@
 -- Encapsulate data transformation in a stored procedure
 
+While you can run the CETAS in a script whenever you need to transform data, it is good practice to encapsulate the transformation operation in a stored procedure.
+
+This approach can make it easier to operationalize data transformations by enabling you to:
+
+1) supply parameters
+2) retrieve outputs
+3) include additional logic in a single procedure call
+

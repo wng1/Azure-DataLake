@@ -64,5 +64,9 @@ WHERE OrderType = 'Special Order';
 DROP EXTERNAL TABLE SpecialOrders;
 
 
+-- Encapsulate data transformation in a stored procedure
+
+
+
 
 

@@ -21,3 +21,30 @@ BEGIN
               )
       DROP EXTERNAL TABLE SpecialOrders
 
+
+
+-- Create external table with special orders
+-- from the specified year
+
+CREATE EXTERNAL TABLE SpecialOrders
+    WITH (
+        LOCATION = 'special_orders', 
+        DATA_SOURCE = files,
+        FILE_FORMAT = ParquetFormat,
+        )
+AS
+SELECT OrderID, CustomerName, OrderTotal
+FROM
+    OPENROWSET(
+        BULK 'sales_orders/*.csv',
+        DATA_SOURCE = 'files',
+        FORMAT = 'CSV',
+        PARSER_VERSION = '2.0',
+        HEADER_ROW = TRUE
+        ) AS source_data
+WHERE OrderType = 'Special Order'
+AND YEAR(OrderDate) = @order_year
+END
+
+https://learn.microsoft.com/en-us/training/modules/use-azure-synapse-serverless-sql-pools-for-transforming-data-lake/3-operationalize-data-transformation-using-stored-procedures
+

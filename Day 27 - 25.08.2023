@@ -8,3 +8,16 @@ This approach can make it easier to operationalize data transformations by enabl
 2) retrieve outputs
 3) include additional logic in a single procedure call
 
+
+CREATE PROCEDURE usp_special_orders_by_year @order_year INT
+AS
+BEGIN
+
+-- Drop the table if it already exists
+
+    IF EXISTS (
+              SELECT * FROM sys.external_tables
+              WHERE name = 'SpecialOrders'
+              )
+      DROP EXTERNAL TABLE SpecialOrders
+

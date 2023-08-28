@@ -13,3 +13,20 @@ benefit from an explicit relational schema of tables, views and relationships th
 https://learn.microsoft.com/en-gb/training/modules/create-metadata-objects-azure-synapse-serverless-sql-pools/2-lake-database
 
 
+USE RetailDB;
+GO
+
+SELECT CustomerID, FirstName, LastName
+FROM Customer
+ORDER BY LastName;
+
+--------------------------------------
+Alternatively you can use Apache Spark SQL Pool
+%%sql
+INSERT INTO 'RetailDB'.'Customer' VALUES (123, 'John', 'Yang)
+
+%%sql
+SELECT * FROM 'RetailDB'.'Customer' WHERE CustomerID = 123
+
+
+

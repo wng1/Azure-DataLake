@@ -1,0 +1,11 @@
+1) Flexibility of storing data files in a data lake.  - Lake databases in ASA provide a way to combine these two approaches and
+benefit from an explicit relational schema of tables, views and relationships that is decoupled from file-based storage.
+
+- Understand the database concepts and components
+- Describe the database templates in Azure Synpas Analytics
+- Create a lake database
+
+- Familiarity with Microsoft Azure portal
+- Familiarity with data lake and data warehouse concepts
+- Experience of using SQL to query database tables
+

@@ -9,10 +9,40 @@
 Completion of:
 
 Choosing an authenitication method in Azure Synpase serverless SQL pools
+-- SQL Authentication
+-- Azure Active Directory Auntheniction
+
 Manage users in Azure Synpase serverless SQL pools
+
 Manager user permissions in Azure Synpase serverless SQL pools
 
 
 
 
+Access to storage accounts - A user that is logged into the serverless SQL pool service must be authorised to access and query the files in Azure Storage. Serverless SQL pool supports
+the following authorisation types:
 
+-- Anonymous access
+
+   To access publicly available files placed on Azure storage accounts that allow anonymous access..
+
+-- Shared access signature (SAS)
+
+   Provided delegated access to resources in storage account. i.e. IP address range, acceptable protocol - https/http, granted permissions, validity interval
+
+-- Managed Identity
+
+  Mainly admins must grant permissions to Managed Identity for accessing the data.
+
+-- User Identity
+
+  Also known as "pass-throught" - is an authorisation type where the identity of the Azure AD user that logged onto the serverless SQL pool
+  is used to authorize access to the data. 
+
+
+https://learn.microsoft.com/en-gb/training/modules/secure-data-manage-users-azure-synapse-serverless-sql-pools/2-choose-authentication-method
+
+
+--Database level permissions and Server level permissions
+
+https://learn.microsoft.com/en-gb/training/modules/secure-data-manage-users-azure-synapse-serverless-sql-pools/4-manage-user-permissions

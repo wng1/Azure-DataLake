@@ -1,1 +1,9 @@
+--Secure data and manager users in Azure Synapse serverless SQL pools
+
+
+1) Choose an authentication method in Azure Synpase serverless SQL pools
+2) Manager users in Azure serverless SQL pools
+3) Manage users permissions in Azure Synpase serverless SQL pools
+
+
 

@@ -10,3 +10,17 @@ https://learn.microsoft.com/en-us/training/modules/explore-core-data-concepts/1-
 
 https://learn.microsoft.com/en-us/training/modules/explore-core-data-concepts/2-data-formats
 
+https://learn.microsoft.com/en-us/training/modules/explore-core-data-concepts/6-analytical-processing
+
+Analytical Data Processing typically uses read-only systems that store vast volumes of historical data or business metrics.
+
+Data files may be stored in a central data lake for analysis. ETL copies data from files and OLTP databases into data warehouse that is 
+optimized for read activity.
+
+Commonly, a data warehouse schema is based on fact tables that contain numeric values you want to analyze (for example, sales amounts),
+with related dimension tables that represent the entities by which you want to measure them (for example, customer or product),
+
+
+The data in the data lake, data warehouse, and analytical model can be queried to produce reports, visualizations, and dashboards.
+
+

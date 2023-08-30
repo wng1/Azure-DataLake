@@ -23,4 +23,5 @@ with related dimension tables that represent the entities by which you want to m
 
 The data in the data lake, data warehouse, and analytical model can be queried to produce reports, visualizations, and dashboards.
 
-
+Data lakes are common in large-scale data analytical processing scenarios, where a large volume of file-based data must 
+be collected and analyzed.

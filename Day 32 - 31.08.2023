@@ -32,3 +32,19 @@ display(df.limit(10))
 
 Step 2 ) Specifying a dataframe schema
 
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+
+productSchema = StructType([
+        StructField("ProductID", IntegerType()),
+        StructField("ProductName", StringType()),
+        StructField("Category", StringType()),
+        StructField("ListPrice", FloatType())
+        ])
+
+df = spark.read.load('fileurl/file.csv',
+    format='csv',
+    header=False)
+display(df.limit(10))
+
+

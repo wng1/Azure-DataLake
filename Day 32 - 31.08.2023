@@ -1,0 +1,11 @@
+Apache Spark - core technology for large-scale data analytics. Learn how to use Spark in ASA to analyse and visualise data in data lake.
+
+It is important to remember that Apache Spark is a open source parallel processing framework for large-scale data processing and analytics. It has become 
+extremely popular in big data processing scenarios, and is available in multiple platform implementations.
+
+This includes:
+
+Azure HDInishgt
+Azure Datatricks
+Azure Synapse Analytics
+

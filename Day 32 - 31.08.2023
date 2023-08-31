@@ -9,3 +9,9 @@ Azure HDInishgt
 Azure Datatricks
 Azure Synapse Analytics
 
+The purpose of this module is to use Spark in ASA to ingest, process and analyse data from a data lake. 
+
+1) Identify the core features and capabilities of Apache Spark.
+2) Configure a Spark pool in Azure Synapse Analytics
+3) Run code to load, analyse and visualise data in a Spark notebook.
+

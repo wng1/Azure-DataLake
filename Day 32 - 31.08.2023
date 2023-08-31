@@ -48,3 +48,17 @@ df = spark.read.load('fileurl/file.csv',
 display(df.limit(10))
 
 
+Step 3 )   Filtering and Grouping Dataframes
+
+pricelist_df = df["ProductID", "ListPrice"]
+
+
+
+Step 4 )   Finding with a WHERE clause in dataframe
+
+bikes_df = df.select("ProductName", "ListPrice"). where((df["Category"]=="Mountain Bikes") | df["Category"]=="Road Bikes"))
+
+display(bikes_df)
+
+
+

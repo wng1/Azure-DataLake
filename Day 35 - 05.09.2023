@@ -4,3 +4,10 @@ Transform Data with Spark in Azure Synpase Analytics
 https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-synapse-analytics/
 
 
+
+
+--Use Apache Spark to modify and save dataframes
+--Partition data files for improved performance and scalability
+--Transform data with SQL
+
+

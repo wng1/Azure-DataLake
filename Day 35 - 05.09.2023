@@ -14,3 +14,28 @@ https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-sy
 
 https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-synapse-analytics/2-transform-dataframe
 
+
+
+Python
+order_details = spark.read.csv('......', header=True, inferSchema=True)
+display(order_details.limit(5))
+
+Python
+
+from pyspark.sql.functions import split, col
+
+#Create the new FirstName and LastName fields using the Customer Name field
+transformed_df = order_details.withColumn("FirstName", split(col("CustomerName), "").get(Item(0)).withColumn("LastName", split(col("Customer Name), " ").getItem(1))
+
+#Remove the CustomerName field
+transformed_df = transformed_df.drop("CustomerName")
+
+displayed(transformed_df.limit(5))
+
+#Save the transformed data
+
+transformed_df.write.mode("overwrite").parquest("/.../ordes.parquet')
+print("Tranformed data Saved!")
+
+
+

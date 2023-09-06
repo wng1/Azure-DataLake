@@ -124,6 +124,10 @@ deltaTable.update(
   set = { "Price": "Price * 0.9"})
 
 
+##Querying a previous version of a table
+
+df = spark.read.format("delta").option("versionAsOf", 0).load(delta_table_path)
+df = spark.read.format("delta").option("timestampAsOf", '2022-01-01').load(delta_table_path)
 
 
 

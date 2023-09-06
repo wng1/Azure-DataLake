@@ -1,0 +1,25 @@
+https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-synapse-analytics/3-partition-data
+
+
+from pyspark.sql.functions import year, col
+
+df = spark.read.csv('________________', header=True, inferSchema=True)
+dated_df = df.withColumn("Year", year(col("OrderDate")))
+
+# The folder name is generated when partioning a dataframe include the partitioning column name and value in column=value format, as shown here:
+
+dated_df.write.partitionBy("Year").mode("overwrite").parquest("/data")
+
+
+
+#Filter parquet files in a query
+
+When reading data from parquet files into a dataframe, you have the ability to pull data from any folder within the hierarchical folders. 
+This filtering process is done with the use of explicit values and wildcards against the partitioned fields.
+
+In the following example, the following code will pull the sales orders, which were placed in 2020.
+
+orders_2020 = spark.read.parquet('_____________')
+display(order_2020.limit(5))
+
+

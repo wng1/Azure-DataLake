@@ -37,3 +37,7 @@ https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-sy
 THe SparkSQL Library, which provides the dataframe structure also enables you to use SQL as a way of working with data. 
 With this approahc, you can "query" and "transform" data in dataframes by using SQL queries, and "persist" the results as tables.
 
+External Tables are "loosely bound" to the underlyign files and deleting the table does not delete the files.
+This allows you to use Spark to do the heavy lifting of transformation then persist the data in the lake. After this is done you can
+drop the table and downstream processes can access these optimized structures.
+

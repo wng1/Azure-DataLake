@@ -71,3 +71,59 @@ DROP TABLE transformed_orders;
 DROP TABLE sales_orders;
 
 
+##Use Delta Lake in Azure Synapse Analytics
+
+-- Describe core features and capabilities of Delta Lake
+-- Create and use Delta Lake table in a Synapse Analytics Spark pool
+-- Create Spark catalog tables for Delta Lake data
+-- Use Delta Lake tables for streaming data
+-- Query Delta Lake tables from a Synapse Analytics SQL pool
+
+Linux foundation (Delta Lake) is an open-source storage layer for Spark that enables relational database capabilities for batch and streaming data.
+
+By using Delta Lake, you can implement a data lakehouse architecture in Spark to support SQL base data manipulation semantics with support for transactions and schema
+enforcement.
+
+- Support for batch and streaming data. While most relational databases include tables that store static data, Spark includes native support for streaming data through the Spark Structured Streaming API. Delta Lake tables can be used as both sinks (destinations) and sources for streaming data.
+- Standard formats and interoperability. The underlying data for Delta Lake tables is stored in Parquet format, which is commonly used in data lake ingestion pipelines. Additionally, you can use the serverless SQL pool in Azure Synapse Analytics to query Delta Lake tables in SQL.
+
+--https://learn.microsoft.com/en-gb/training/modules/use-delta-lake-azure-synapse-analytics/3-create-delta-tables
+-- Python
+#Load a file into a dataframe
+
+df = spark.read.load('.../test.csv', format='csv', header=True)
+
+#Save the dataframe as a delta table
+delta_table_path = "/folderpath"
+df.write.format("delta").save(delta_table_path)
+
+#You can replace an existing Delta Lake table with the contents of a dataframe by using the overwrite mode, as shown here:
+
+new_df.write.format("delta").mode("overwrite").save(delta_table_path)
+
+#You can also add rows from a dataframe to an existing table by using the append mode:
+
+new_append_df.write.format("delta").mode("append").save(delta_table_path)
+
+
+#DeltaLake API has a DeltaTable object that can be used to support in the update, delete, merge operations. The following code can be used 
+#to update the price column for all rows with a category column value of "Accessories".
+
+
+-- Python
+
+from delta.tables import *
+from pyspark.sql.functions import *
+
+#Create a DeltaTable object
+deltaTable = DeltaTable.forPath(spark, delta_table_path)
+
+#Update the table (reduce price of accessories by 10%)
+deltaTable.update(
+  condition = "Category == 'Accessories'",
+  set = { "Price": "Price * 0.9"})
+
+
+
+
+

@@ -56,3 +56,18 @@ sql_tranform = spark.sql("SELECT *, YEAR(OrderDate) AS Year, MONTH(OrderDate) AS
 #Save the results
 sql_transform.write.partitionBy("Year","Month").saveAsTable('transformed_orders', format='parquet', mode#='overwrite', path='/transformed_orders_table')
 
+
+
+#Query the metastore
+
+%%sql
+
+SELECT * FROM transformed_orders
+WHERE Year = 2021
+  AND Month = 1
+
+#Drop the tables
+DROP TABLE transformed_orders;
+DROP TABLE sales_orders;
+
+

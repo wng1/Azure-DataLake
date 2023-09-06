@@ -129,5 +129,98 @@ deltaTable.update(
 df = spark.read.format("delta").option("versionAsOf", 0).load(delta_table_path)
 df = spark.read.format("delta").option("timestampAsOf", '2022-01-01').load(delta_table_path)
 
+##Creating catalog tables
+
+# Save a dataframe as a managed table
+df.write.format("delta").saveAsTable("MyManagedTable")
+
+## specify a path option to save as an external table
+df.write.format("delta").option("path", "/mydata").saveAsTable("MyExternalTable")
+
+##Creating a catalog table using SQL via Python
+spark.sql("CREATE TABLE MyExternalTable USING DELTA LOCATION '/mydata'")
+
+##OR via SQL 
+
+%%sql
+
+CREATE TABLE MyExternalTable
+USING DELTA
+LOCATION '/mydata'
+
+##Defining the table schema
+
+%%sql
+
+CREATE TABLE ManagedSalesOrders
+(
+    Orderid INT NOT NULL,
+    OrderDate TIMESTAMP NOT NULL,
+    CustomerName STRING,
+    SalesTotal FLOAT NOT NULL
+)
+USING DELTA
+
+
+Using the DeltaTableBuilder API
+
+from delta.tables import *
+
+DeltaTable.create(spark) \
+  .tableName("default.ManagedProducts") \
+  .addColumn("Productid", "INT") \
+  .addColumn("ProductName", "STRING") \
+  .addColumn("Category", "STRING") \
+  .addColumn("Price", "FLOAT") \
+  .execute()
+
+
+%%sql
+
+SELECT orderid, salestotal
+FROM ManagedSalesOrders
+
+
+
+##Querying delta formatted files with OPENROWSET
+
+SELECT *
+FROM
+    OPENROWSET(
+        BULK 'https://..../delta/mytable/',
+        FORMAT = 'DELTA'
+    ) AS deltadata
+
+
+
+##Create database and add location of data source by OPENROWSET
+
+CREATE DATABASE MyDB
+      COLLATE Latin1_General_100_BIN2_UTF8;
+GO;
+
+USE MyDB;
+GO
+
+CREATE EXTERNAL DATA SOURCE DeltaLakeStore
+WITH
+(
+    LOCATION = 'https://mystore.dfs.core.windows.net/files/delta/'
+);
+GO
+
+SELECT TOP 10 *
+FROM OPENROWSET(
+        BULK 'mytable',
+        DATA_SOURCE = 'DeltaLakeStore',
+        FORMAT = 'DELTA'
+    ) as deltadata;
+
+
+##Querying Catalog Tables
+
+USE default;
+
+SELECT * FROM MyDeltaTable;
 
 

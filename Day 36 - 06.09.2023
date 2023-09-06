@@ -41,3 +41,18 @@ External Tables are "loosely bound" to the underlyign files and deleting the tab
 This allows you to use Spark to do the heavy lifting of transformation then persist the data in the lake. After this is done you can
 drop the table and downstream processes can access these optimized structures.
 
+
+#Save loaded csv file as an externtable name (sales_order) and store in data lake as /sales_orders_table
+order_details.write.saveAsTable('sale_orders', format='parquet', mode='overwrite', path='/sales_orders_table')
+
+
+#Use SQL to query and transform the data
+
+#Python
+#Create derived columns
+
+sql_tranform = spark.sql("SELECT *, YEAR(OrderDate) AS Year, MONTH(OrderDate) AS Month FROM sales_orders")
+
+#Save the results
+sql_transform.write.partitionBy("Year","Month").saveAsTable('transformed_orders', format='parquet', mode#='overwrite', path='/transformed_orders_table')
+

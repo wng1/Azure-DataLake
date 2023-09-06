@@ -1,5 +1,9 @@
 https://learn.microsoft.com/en-gb/training/modules/transform-data-spark-azure-synapse-analytics/3-partition-data
 
+The Parquet format is typically preferred for data files that you will use for further analysis or ingestion into an analytical store.
+Parquet is a very efficient format that is supported by most large scale data analytics systems. 
+In fact, sometimes your data transformation requirement may simply be to convert data from another format (such as CSV) to Parquet!
+
 
 from pyspark.sql.functions import year, col
 

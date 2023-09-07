@@ -1,0 +1,97 @@
+Work with Data warehouses using Azure Synpases Analytics
+
+Relational data warehouses are a core elments of most enterprise business intelligence (BI) solutions and are used as the basis for data models, reports and analysis. While the specific details may vary across data warehouse implementations, a common pattern based on a denormalized, multidimensional schema has emerged as the standard design for a relational data warehouse.
+Azure Synpase Analytics includes a highly scalable relational database engine that is optimized for data warehousing workloads.
+By using dedicated SQL pools in Azure Synpase Analytics, you can create databases that are capable of hosting and quering huge volumes of data in relational tables.
+
+In this module, you'll learn how to:
+- Design a schema for a relational data warehouse
+- Create fact, dimension, and staging tables
+- Use SQL to load data into data warehouse tables
+- Use SQL to query retional 
+
+1) Design a datawarehouse schema
+
+A data warehouse contain tables in which the data you want to analyze is stored. Most commonly , these tables are organized in a schema that is optimized for multidimensional modelling, in which measures associated with events known as facts can be aggregrated by the attributes of associated entities across multiple dimensions.
+
+Data warehouse schema designs
+In most transactional databases that are used in business applications, the data is normalized to reduce duplication. In a data warehouse however, the dimension data is generally de-normalized to reduce the number of joins required to query the data.
+https://learn.microsoft.com/en-gb/training/modules/design-multidimensional-schema-to-optimize-analytical-workloads/3-create-tables
+
+2) Creating staging tables
+Staging tables are used as temporary storage for data as it's being loaded into the data warehouse. A typical pattern is to structure the table to make it as efficient as possible to ingest the data from its external source (often files in a data lake) into the relational database, and then use SQL statements to load the data from the staging tables into the dimension and fact tables.
+
+3) Using external tables
+https://learn.microsoft.com/en-gb/training/modules/design-multidimensional-schema-to-optimize-analytical-workloads/3-create-tables
+
+4) Load Data wareohuse tables
+https://learn.microsoft.com/en-gb/training/modules/design-multidimensional-schema-to-optimize-analytical-workloads/4-load-data
+At a basic level, loading a data warehouse is typically achieved by adding new data from files in a data lake into tables in the data warehouse.
+
+COPY INTO dbo.StageProducts
+    (ProductID, ProductName, ProductCategory, Color, Size, ListPrice, Discontinued)
+FROM 'https://mydatalake.blob.core.windows.net/data/stagedfiles/products/*.parquet'
+WITH
+(
+    FILE_TYPE = 'PARQUET',
+    MAXERRORS = 0,
+    IDENTITY_INSERT = 'OFF'
+);
+5) Query a data warehouse
+
+SELECT  dates.CalendarYear,
+        dates.CalendarQuarter,
+        SUM(sales.SalesAmount) AS TotalSales
+FROM dbo.FactSales AS sales
+JOIN dbo.DimDate AS dates ON sales.OrderDateKey = dates.DateKey
+GROUP BY dates.CalendarYear, dates.CalendarQuarter
+ORDER BY dates.CalendarYear, dates.CalendarQuarter;
+
+The results from this query would look similar to the following table:
+CalendarYear 	CalendarMonth 	TotalSales
+2020 	1 	25980.16
+2020 	2 	27453.87
+2020 	3 	28527.15
+2020 	4 	31083.45
+2021 	1 	34562.96
+2021 	2 	36162.27
+... 	... 	...
+
+DimCustomer Table:
+SELECT  dates.CalendarYear,
+        dates.CalendarQuarter,
+        custs.City,
+        SUM(sales.SalesAmount) AS TotalSales
+FROM dbo.FactSales AS sales
+JOIN dbo.DimDate AS dates ON sales.OrderDateKey = dates.DateKey
+JOIN dbo.DimCustomer AS custs ON sales.CustomerKey = custs.CustomerKey
+GROUP BY dates.CalendarYear, dates.CalendarQuarter, custs.City
+ORDER BY dates.CalendarYear, dates.CalendarQuarter, custs.City;
+
+
+CalendarYear 	CalendarMonth 	City 	TotalSales
+2020 	1 	Amsterdam 	5982.53
+2020 	1 	Berlin 	2826.98
+2020 	1 	Chicago 	5372.72
+... 	... 	... 	..
+2020 	2 	Amsterdam 	7163.93
+2020 	2 	Berlin 	8191.12
+2020 	2 	Chicago 	2428.72
+... 	... 	... 	..
+2020 	3 	Amsterdam 	7261.92
+2020 	3 	Berlin 	4202.65
+2020 	3 	Chicago 	2287.87
+... 	... 	... 	..
+2020 	4 	Amsterdam 	8262.73
+2020 	4 	Berlin 	5373.61
+2020 	4 	Chicago 	7726.23
+... 	... 	... 	..
+2021 	1 	Amsterdam 	7261.28
+2021 	1 	Berlin 	3648.28
+2021 	1 	Chicago 	1027.27
+... 	... 	... 	..
+https://learn.microsoft.com/en-gb/training/modules/design-multidimensional-schema-to-optimize-analytical-workloads/5-query-data
+
+
+Explore a Data Warehouse
+

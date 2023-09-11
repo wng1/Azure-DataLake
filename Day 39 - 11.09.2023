@@ -1,0 +1,124 @@
+Transfer and transform data with Azure Synapse Analytics pipeline
+
+
+Azure Synapse Analytics enables data integration through the use of pipelines, which you can use to automate and orchestra data transfer and transformation activities.
+
+Build a data pipeline in Azure Synapse Analytics
+
+Pipeline are the lifeblood of a data analyitcs solutions. Use ASA pipeline to build integrated data solutions that ETL data across diverse systems. 
+
+{
+  "name": "CopyPipeline",
+  "properties": {
+    "description": "Copy data from a blob to Azure SQL table",
+    "activities": [
+      {
+        "name": "CopyFromBlobToSQL",
+        "type": "Copy",
+        "inputs": [
+          {
+            "name": "InputDataset"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "OutputDataset"
+          }
+        ],
+        "typeProperties": {
+          "source": {
+            "type": "BlobSource"
+          },
+          "sink": {
+            "type": "SqlSink",
+            "writeBatchSize": 10000,
+            "writeBatchTimeout": "60:00:00"
+          }
+        },
+        "policy": {
+          "retry": 2,
+          "timeout": "01:00:00"
+        }
+      }
+    ]
+  }
+}
+
+Define data flows
+
+A data flow is commonly used activity type to define data flow and transformation. Data flows consists of:
+
+- Sources - The input data to be transferred
+- Transformations - various operations you can apply to data as it streams through
+- Sinks - Targets into which the data will be loaded
+
+Build a data pipeline in Azure Synapse Analytics
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/10-Synpase-pipeline.html
+
+
+Understand Synapse Notebooks and Pipelines
+
+https://learn.microsoft.com/en-gb/training/modules/use-spark-notebooks-azure-synapse-pipeline/1-introduction
+
+With Azure Synpase Analytics pipelines, you can orchestrate data transfer and transformation activities and build data integration solutions across multiple systems.
+
+When you're working with analytical data in a data lake, Apache Spark provides a scalable distributed processing platform that you can use to process huge volumes of data efficiently.
+
+The Synpase Notebook activity enables you to run data processing mode in Spark notebooks as a task in a pipeline, making it possible to automate big data procesing and integrate it into ETL workloads.
+
+Azure Synapse Analtyics > Apache Spark Tools
+
+Use a Synapse notebook activity in a pipeline
+
+https://learn.microsoft.com/en-gb/training/modules/use-spark-notebooks-azure-synapse-pipeline/3-use-notebook-activity
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/11-Spark-nobook-in-Synapse-Pipeline.html
+
+
+10.09.2023 - Work with Hybrid Transactional and Analytical Processing Solutions using ASA
+
+Hybrid Transactional / Analytical Processing  (HTAP) is a style of data processing that combines transactional data processing such as is typically found in a business application, with analytical processing, such as is used in a business intelligence (BI) or reporting solution.
+
+The data access patterns and storage optimizations used in these two kinds of workload are very different, so a complex ETL process is required to copy data out of a transactional systems and into analytical systems; adding complexity and latency to data analysis.
+
+In a HTAP solution, the transactional data is replicated automatically, with low-latency, to an analytical store, where it can be queried without impacting the performance of the transactional system.
+
+In Azure Synapse Analytics, HTAP capabilities are provided by multiple Azure Synapse Link services, each connecting a commonly used transactional data store to your Azure Synapse Analytics workspace and making the data available for processing using Spark or SQL.
+
+-- Understand hybrid transactional and analytical processing patterns
+
+Azure Synapse Link for Cosmos DB
+Azure Synapse Link for SQL
+Azure Synpase Link for Dataverse
+
+https://learn.microsoft.com/en-us/training/modules/design-hybrid-transactional-analytical-processing-using-azure-synapse-analytics/3-azure-synapse-link
+
+--Implement Azure Synapse Link with Azure Cosmos DB
+
+https://learn.microsoft.com/en-gb/training/modules/configure-azure-synapse-link-with-azure-cosmos-db/5-query-with-spark
+
+https://learn.microsoft.com/en-gb/training/modules/configure-azure-synapse-link-with-azure-cosmos-db/6-query-with-sql
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/14-Synapselink-cosmos.html
+
+--Implement Azure Synapse LInk for SQL
+
+Azure Synapse Link for SQL enables low-latency synchronization of operational data in a relational database to Azure Synapse Analytics.
+
+https://learn.microsoft.com/en-gb/training/modules/implement-synapse-link-for-sql/ 
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/15-Synapse-link-sql.html
+
+11.09.2023 
+
+Implement a Data Streaming Solution with Azure Stream Analytics
+
+--Azure Stream Analytics enables you to process real-time data streams and integrate the data they contain into applications and analytical solutions.
+
+https://learn.microsoft.com/en-us/training/modules/introduction-to-data-streaming/1-introduction
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/17-stream-analytics.html
+
+
+

@@ -17,5 +17,21 @@ Azure Synapse provides multiple ways to analyze large volume data. Two of the mo
 
 
 
+-- Data lake in Azure Synapse Analytics
 
 
+
+
+When ingesting real-time data into a data lake, your Azure Stream Analytics query must write its results to an 
+output that references the location in the Azure Data Lake Gen2 storage container where you want to save the data files. 
+Data analysts, engineers, and scientists can then process and query the files in the data lake by running code in an Apache Spark pool, 
+or by running SQL queries using a serverless SQL pool.
+
+
+-- Configure inputs and outputs
+
+All Azure Stream Analytics job include at least one input and output.
+
+In most cases, inputs reference sources of streaming data (though you can also define inputs for static reference data to augment the streamed event data). 
+
+Outputs determine where the results of the stream processing query will be sent. 

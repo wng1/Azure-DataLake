@@ -35,3 +35,47 @@ All Azure Stream Analytics job include at least one input and output.
 In most cases, inputs reference sources of streaming data (though you can also define inputs for static reference data to augment the streamed event data). 
 
 Outputs determine where the results of the stream processing query will be sent. 
+
+
+-- Define a query to select, filter, and aggregate data
+
+1) SELECTING INPUT FIELDS
+
+##SQL
+
+SELECT
+    EventEnqueuedUtcTime AS ReadingTime,
+    SensorID,
+    ReadingValue
+INTO
+    [synapse-output]
+FROM
+    [streaming-input] TIMESTAMP BY EventEnqueuedUtcTime
+
+2) Filtering Event Data
+
+SELECT
+    EventEnqueuedUtcTime AS ReadingTime,
+    SensorID,
+    ReadingValue
+INTO
+    [synapse-output]
+FROM
+    [streaming-input] TIMESTAMP BY EventEnqueuedUtcTime
+WHERE ReadingValue < 0
+
+3) Aggregating events over temporal windows
+
+SELECT
+    DateAdd(second, -60, System.TimeStamp) AS StartTime,
+    System.TimeStamp AS EndTime,
+    SensorID,
+    MAX(ReadingValue) AS MaxReading
+INTO
+    [synapse-output]
+FROM
+    [streaming-input] TIMESTAMP BY EventEnqueuedUtcTime
+GROUP BY SensorID, TumblingWindow(second, 60)
+HAVING COUNT(*) >= 1
+
+

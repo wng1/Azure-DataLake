@@ -1,4 +1,17 @@
-Query data in a relational data warehouse
+##Query data in a relational data warehouse
+
+If you used the output of ASA to ingest the results of your stream processing job into a table in a dedicated SQL pool,
+you can query the table using SQL query highlighted below. 
+
+The results of the query will always include the latest data to be ingested at the time the query is run.
+
+Your datawarehouse can include tables for streaming data as well as table for batch ingested data, enabling you to join
+real-time and batch data for historical analytics.
+
+
+This will query a table called factSensorReadings that contains the results of stream processing, and combine it with dimDate Table
+containing detailed data about the dates on which readings were captured.
+
 
 SELECT d.Weekday, s.SensorID, AVG(s.SensorReading) AS AverageReading
 FROM factSensorReading AS s

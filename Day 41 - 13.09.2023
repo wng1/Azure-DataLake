@@ -1,0 +1,8 @@
+Query data in a relational data warehouse
+
+SELECT d.Weekday, s.SensorID, AVG(s.SensorReading) AS AverageReading
+FROM factSensorReading AS s
+JOIN dimDate AS d
+  ON CAST (s.ReadingTime AS DATE) = d.DateKey
+GROUP BY d.Weekday, s.SensorID
+

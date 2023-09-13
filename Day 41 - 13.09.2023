@@ -19,3 +19,27 @@ JOIN dimDate AS d
   ON CAST (s.ReadingTime AS DATE) = d.DateKey
 GROUP BY d.Weekday, s.SensorID
 
+## Querying data in a data lake
+
+As streaming data is ingested into files in a data lake, you can query those files by using a serverless SQL pool
+in Azure Synapse Analytics. 
+
+For examples, the below query will read all fields from all Parquet files under the sensors folder in the
+data file system container.
+
+SELECT *
+FROM OPENROWSET(
+  BULK '________________________________/*',
+  FORMAT = 'parquet' AS rows
+
+##https://learn.microsoft.com/en-gb/training/modules/ingest-streaming-data-use-azure-stream-analytics-synapse/5-run-job-ingest
+
+
+##Python
+
+%%pyspark
+
+df = spark.read.load('__________________________/*', format='parquet'
+)
+display(df)
+

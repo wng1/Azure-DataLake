@@ -43,3 +43,5 @@ df = spark.read.load('__________________________/*', format='parquet'
 )
 display(df)
 
+##https://learn.microsoft.com/en-gb/training/module/ingest-streaming-data-use-azure-stream-analytics-synapse/6-exercise-ingest-streaming-data
+

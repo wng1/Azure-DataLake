@@ -1,0 +1,62 @@
+
+
+##Visualize real-time data with Azure Stream Analytics and Power BI
+
+By combining the stream processing capabilities of Azure Stream Analytics and the data visualization capabilities of Microsoft Power BI, you can create real-time data dashboards.
+
+- Configure a Stream Analytics outputs for Power BI
+- Use a Stream Analytics query to write data to Power BI
+- Create a real-time data visualization in Power BI
+
+Azure Stream Analytics --> Azure Event Hubs ---> Power BI dataset (dashboard)
+
+ASA include:
+Azure Event Hubs
+Azure IoT Hubs
+Azure Blob or Data Lake Gen 2 Storage
+
+Depending on the specific input type, the data for each streamed event includes the event's data fields and input-specific metadata fields. For example, data consumed from an Azure Event Hubs input includes an EventEnqueuedUtcTime field indicating the time when the event was received in the event hub.
+https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-define-inputs
+
+Power BI output to write the results of a Stream Analytics query to a table in a Power BI streaming dataset, from where it can be visualized in a dashboard. 
+When adding a Power BI output to a Stream Analytics job, you need to specify the following properties:
+
+Output alias:
+Group workspace:
+Dataset name:
+Table name:
+Authorize connection:
+
+##Create a query for real-time visualization
+To send streaming data into Power BI, your Azure Synapse Analytics job uses a query that writes its results to a Power BI output. A simple query that forward events data from an event hub directly to Power BI might look like this:
+
+SELECT
+	EventEnqueuedUtcTime As ReadingTime,
+	SensorID,
+	ReadingValue
+INTO
+	[powerbi-output]
+FROM
+	[eventhub-input] TIMESTAMP BY EventEnqueuedTime
+
+Customer or Analyst or Engineer may want to query or drill down further to filter, aggregate the data, sending only relevant or summarized data to the Power BI dataset.
+
+SELECT
+	DateAdd(second, -60, System.TimeStamp) AS StartTime,
+	System.TimeStamp AS EndTime,
+	SensorID,
+	MAX(ReadingValue) AS MaxReading
+INTO
+	[powerbi-output]
+FROM
+	[eventhub-input] TIMESTAMP By EventEnqueuedUtcTime
+WHERE SensorID <> 0
+GROUP BY SensorID, TumblingWindow(second, 60)
+HAVING COUNT(*) > 1
+
+https://learn.microsoft.com/en-gb/training/modules/visualize-real-time-data-azure-stream-analytics-power-bi/3-realtime-query
+
+##Create Real-Time Data Visualizations in Power BI
+When you successfully run an Azure Stream Analytics job that sends result to Power BI output, a streaming data set containing a single table is created in Power BI workspace specified for the output.
+The table contains the data produced by the Stream Analytics query.
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/19-Stream-Power-BI.html

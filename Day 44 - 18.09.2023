@@ -1,0 +1,63 @@
+##Data Engineering with Azure Databricks
+https://learn.microsoft.com/en-gb/certifications/exams/dp-203/
+https://learn.microsoft.com/en-gb/training/paths/data-engineer-azure-databricks/
+
+#Harness the power of Apache Spark.
+Azure Databricks is a fully managed, cloud-based data analytics platform, which empowers developers to accelarate AI and innovation by simplifying the process of building enterprise-grade data applications.
+Built as joint effort by Microsoft and the team that started Apache Spark, Azure Databricks provides data science, engineering and analytical teams with a single platform for big data processing and machine learning.
+By combining the power of Databricks, an end-to-end, managed Apache Spark platform
+
+#Get Started  
+
+1) Crate Azure Databricks workspace by going to Azure Potal > Azure Resource Manager Manager > New-AzDatabricksOWrkspace
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/23-Explore-Azure-Databricks.html
+
+#Use Apache Spark in Azure Databricks
+Azure Databricks is built on Apache Spark and enables data engineers and analysts to run
+Spark Jobs to
+1) Transform
+2) Analyze
+3) Visualize Data at Scale
+
+Spark can support many different programing languages and API. Dataframe API. 
+https://learn.microsoft.com/en-gb/training/modules/use-apache-spark-azure-databricks/03-spark-cluster
+
+Spark - Dataframe
+https://learn.microsoft.com/en-gb/training/modules/use-apache-spark-azure-databricks/05-write-spark-code
+
+##Use Delta lake in Azure Databricks
+https://learn.microsoft.com/en-gb/training/modules/use-delta-lake-azure-databricks/
+https://learn.microsoft.com/en-gb/training/modules/use-delta-lake-azure-databricks/03-create-delta-tables
+# Load a file into a dataframe
+df = spark.read.load('/data/mydata.csv', format='csv', header=True)
+# Save the dataframe as a delta table
+delta_table_path = "/delta/mydata"
+df.write.format("delta").save(delta_table_path)
+new_df.write.format("delta").mode("overwrite").save(delta_table_path)
+new_rows_df.write.format("delta").mode("append").save(delta_table_path)
+
+-------------------------------------------------------------------------------------------------
+from delta.tables import *
+from pyspark.sql.functions import *
+
+# Create a deltaTable object
+deltaTable = DeltaTable.forPath(spark, delta_table_path)
+
+# Update the table (reduce price of accessories by 10%)
+deltaTable.update(
+    condition = "Category == 'Accessories'",
+    set = { "Price": "Price * 0.9" })
+--------------------------------------------------------------------------------------------------
+
+##Use SQL Warehouses in Azure Databricks
+https://learn.microsoft.com/en-gb/training/modules/use-sql-warehouses-azure-databricks/ 
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/26-Azure-Databricks-SQL.html 
+##Run Azure Databricks Notebooks with Azure Data Factory
+https://learn.microsoft.com/en-gb/training/modules/run-azure-databricks-notebooks-azure-data-factory/
+
+https://microsoftlearning.github.io/dp-203-azure-data-engineer/Instructions/Labs/27-Azure-Databricks-Data-Factory.html
+
+
+
+
+

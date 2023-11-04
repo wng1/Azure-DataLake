@@ -1,4 +1,4 @@
-Analyse performance indicators for Azure Blob Storage
+###Analyse performance indicators for Azure Blob Storage
 
 https://learn.microsoft.com/en-us/training/modules/analyze-azure-blob-storage-performance-indicators/
 
@@ -33,5 +33,10 @@ Using that formula, we can calculate the total transactions per second in the fo
     Total transactions per second = 270 + 116 = 386
 
     With 5 TB of data, this corresponds to 386 / 5 = 77 TPS/TB.
+
+
+### Optimise your cost with Azure Blob Storage
+
+https://learn.microsoft.com/en-us/training/modules/optimize-your-cost-azure-blob-storage/
 
 

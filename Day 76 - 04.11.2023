@@ -2,3 +2,36 @@ Analyse performance indicators for Azure Blob Storage
 
 https://learn.microsoft.com/en-us/training/modules/analyze-azure-blob-storage-performance-indicators/
 
+As a cloud administrator responsible for optimizing use of Azure resources, you need to identify the solution that would reconcile these two seemingly conflicting goals.  To accomplish this 
+objective, you decide to explore the performance characteristics and the pricing model of Azure Blob Storage, focusing on the use of Azure Premium Blob Storage.
+
+
+700 million read operations
+300 million write operations
+
+30 days using 5 Terabyters
+
+Calculate the Results  TPS/TB  (Transaction per second / Terabytes
+
+$${o = \frac{ n }{ d\ \times\ h\ \times\ m\ \times\ s }}$$
+
+Where the variables are defined as follows:
+
+    o = Operations per second
+    n = Number of operations
+    d = Days
+    h = Hours
+    m = Minutes
+    s = Seconds
+
+Using that formula, we can calculate the total transactions per second in the following examples:
+
+    Write transactions per second = 300,000,000 / (30 x 24 x 60 x 60) = 116 (rounded to the nearest whole number)
+
+    Read transactions per second = 700,000,000 / (30 x 24 x 60 x 60) = 270 (rounded to the nearest whole number)
+
+    Total transactions per second = 270 + 116 = 386
+
+    With 5 TB of data, this corresponds to 386 / 5 = 77 TPS/TB.
+
+
